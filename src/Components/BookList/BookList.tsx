@@ -4,7 +4,7 @@ import Book from "../Book/Book";
 
 interface Props {}
 
-const BookList = (props: Props) => {
+const BookList : React.FC<Props> = (props: Props): JSX.Element => {
     return (
         <div>
             <Book title="Lord of the Rings" author="J.R.R. Tolkien" description="book"/>
