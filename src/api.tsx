@@ -2,15 +2,15 @@ import axios from 'axios';
 import {BookSearch} from "./library";
 
 interface SearchResponse {
-    docs: BookSearch[];
+    data: BookSearch[];
 }
 
-export const searchBooks = async (query: string) => {
+export const searchBooks = async (query: string)=> {
     try {
-        const response = await axios.get<SearchResponse>(
+        const data= await axios.get<SearchResponse>(
             `https://openlibrary.org/search.json?q=${query}&apikey=${process.env.REACT_APP_OPEN_LIBRARY_API_KEY}`
         );
-        return response.data.docs;
+        return data;
     } 
     catch (error) {
         if (axios.isAxiosError(error)) {
@@ -19,7 +19,7 @@ export const searchBooks = async (query: string) => {
         }
         else {
             console.log("unexpected error: ", error);
-            return error;
+            return "An unexpected error occurred.";
         }
     } 
 }
