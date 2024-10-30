@@ -1,16 +1,16 @@
 import axios from 'axios';
-import {BookSearch} from "./library";
+import { Book } from "./library";
 
 interface SearchResponse {
-    data: BookSearch[];
+    docs: Book[];
 }
 
-export const searchBooks = async (query: string)=> {
+export const searchBooks = async (query: string): Promise<Book[] | string>=> {
     try {
-        const data= await axios.get<SearchResponse>(
+        const response= await axios.get<SearchResponse>(
             `https://openlibrary.org/search.json?q=${query}&apikey=${process.env.REACT_APP_OPEN_LIBRARY_API_KEY}`
         );
-        return data;
+        return response.data.docs;
     } 
     catch (error) {
         if (axios.isAxiosError(error)) {
