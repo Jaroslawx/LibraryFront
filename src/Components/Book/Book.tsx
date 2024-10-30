@@ -1,28 +1,30 @@
 ﻿import React from "react";
 import "./Book.css";
+import { Book as BookType } from "../../library";
 
 interface Props {
-    title: string;
-    author: string;
-    description: string;
+    id: string;
+    searchResult: BookType;
 }
 
-const Book: React.FC<Props> = ({
-                                   title, author, description
-}: Props) : JSX.Element => {
+const Book: React.FC<Props> = ({ id, searchResult }: Props) : JSX.Element => {
   return (
       <div className="book">
-          <img 
-              src="https://res.cloudinary.com/ggeztrw22/image/upload/v1730045814/Library/books/usdrwx8ghz4cjflzpc0t.jpg" 
-              alt="Book Cover" 
-          />
+          {searchResult.cover?.large && (
+              <img
+                  src={searchResult.cover.large}
+                  alt={`Cover of ${searchResult.title}`}
+              />
+          )}
           <div className="details">
-              <h2>{title}</h2>
-              <p>{author}</p>
+              <h2>{searchResult.title}</h2>
+              {searchResult.author_name && (
+                  <p>{searchResult.author_name.join(", ")}</p>
+              )}
           </div>
-          <p className="info">
-              {description}
-          </p>
+          {searchResult.description && (
+              <p className="info">{searchResult.description}</p>
+          )}
       </div>
   );
 };

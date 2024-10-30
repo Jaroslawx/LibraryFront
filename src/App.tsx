@@ -7,7 +7,7 @@ import {searchBooks} from "./api";
 
 function App() {
     const [search, setSearch] = useState<string>("")
-    const [searchResults, setSearchResults] = useState<Book[]>([]);
+    const [searchResult, setSearchResult] = useState<Book[]>([]);
     const [serverError, setServerError] = useState<string>("");
     
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,16 +20,16 @@ function App() {
         if (typeof result === "string") {
             setServerError(result);
         } else {
-            setSearchResults(result);
+            setSearchResult(result);
         }
-        console.log(searchResults);
+        console.log(searchResult);
     };
     
     return (
         <div className="App">
             <Search onClick={onClick} search={search} handleChange={handleChange} />
             {serverError && <h1>{serverError}</h1>}
-            <BookList />
+            <BookList searchResults={searchResult}/>
         </div>
   );
 }
