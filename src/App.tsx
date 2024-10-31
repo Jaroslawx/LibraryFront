@@ -19,6 +19,8 @@ function App() {
     
     const onBookshelfCreate = (e: any) => {
         e.preventDefault();
+        const exists = bookshelfValues.find((value) => value === e.target[0].value);
+        if (exists) return;
         const updatedBookshelf = [...bookshelfValues, e.target[0].value]
         setBookshelfValues(updatedBookshelf);
     }  
