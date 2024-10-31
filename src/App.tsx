@@ -14,7 +14,12 @@ function App() {
         setSearch(e.target.value);
         console.log(e);
     };
-
+    
+    const onBookshelfCreate = (e: SyntheticEvent) => {
+        e.preventDefault();
+        console.log(e)
+    }  
+    
     const onClick = async (e: SyntheticEvent) => {
         const result = await searchBooks(search);
         if (typeof result === "string") {
@@ -29,7 +34,7 @@ function App() {
         <div className="App">
             <Search onClick={onClick} search={search} handleChange={handleChange} />
             {serverError && <h1>{serverError}</h1>}
-            <BookList searchResults={searchResult}/>
+            <BookList searchResults={searchResult} onBookshelfCreate={onBookshelfCreate}/>
         </div>
   );
 }

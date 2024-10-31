@@ -1,13 +1,15 @@
-﻿import React from "react";
+﻿import React, { SyntheticEvent } from "react";
 import "./Book.css";
 import { Book as BookType } from "../../library";
+import AddBookshelf from "../Bookshelf/AddBookshelf/AddBookshelf";
 
 interface Props {
     id: string;
     searchResult: BookType;
+    onBookshelfCreate: (e: SyntheticEvent) => void;
 }
 
-const Book: React.FC<Props> = ({ id, searchResult }: Props) : JSX.Element => {
+const Book: React.FC<Props> = ({ id, searchResult, onBookshelfCreate }: Props) : JSX.Element => {
   return (
       <div className="book">
           {searchResult.cover?.large && (
@@ -25,6 +27,10 @@ const Book: React.FC<Props> = ({ id, searchResult }: Props) : JSX.Element => {
           {searchResult.description && (
               <p className="info">{searchResult.description}</p>
           )}
+          <AddBookshelf 
+              onBookshelfCreate={onBookshelfCreate}
+              title={searchResult.title}
+          />
       </div>
   );
 };
