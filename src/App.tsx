@@ -8,7 +8,7 @@ import ListBookshelf from "./Components/Bookshelf/ListBookshelf/ListBookshelf";
 
 function App() {
     const [search, setSearch] = useState<string>("")
-    const [bookshelfValues, setBookshelfValues] = useState<string[]>([]); // ["wantToRead", "currentlyReading"
+    const [bookshelfValues, setBookshelfValues] = useState<string[]>([]);
     const [searchResult, setSearchResult] = useState<Book[]>([]);
     const [serverError, setServerError] = useState<string>("");
     
@@ -25,6 +25,14 @@ function App() {
         setBookshelfValues(updatedBookshelf);
     }  
     
+    const onBookshelfDelete = (e: any) => {
+        e.preventDefault();
+        const removed = bookshelfValues.filter((value) => {
+            return value !== e.target[0].value;
+        });
+        setBookshelfValues(removed);
+    }
+    
     const onSearchSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
         const result = await searchBooks(search);
@@ -39,9 +47,16 @@ function App() {
     return (
         <div className="App">
             {serverError && <h1>{serverError}</h1>}
-            <Search onSearchSubmit={onSearchSubmit} search={search} handleSearchChange={handleSearchChange} />
-            <ListBookshelf bookshelfValues={bookshelfValues}/>
-            <BookList searchResults={searchResult} onBookshelfCreate={onBookshelfCreate}/>
+            <Search 
+                onSearchSubmit={onSearchSubmit} 
+                search={search} 
+                handleSearchChange={handleSearchChange} />
+            <ListBookshelf 
+                bookshelfValues={bookshelfValues} 
+                onBookshelfDelete={onBookshelfDelete}/>
+            <BookList 
+                searchResults={searchResult} 
+                onBookshelfCreate={onBookshelfCreate}/>
         </div>
   );
 }

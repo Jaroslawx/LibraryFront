@@ -1,14 +1,18 @@
-import React from "react";
+import React, {SyntheticEvent} from "react";
+import DeleteBookshelf from "../DeleteBookshelf/DeleteBookshelf";
 
 interface Props {
     bookshelfValue: string;
+    onBookshelfDelete: (e: SyntheticEvent) => void;
 }
 
-const BookBookshelf = ({bookshelfValue}: Props) => {
+const BookBookshelf = ({bookshelfValue, onBookshelfDelete}: Props) => {
     return (
         <>
             <h4>{bookshelfValue}</h4>
-            <button>X</button>
+            <DeleteBookshelf 
+                onBookshelfDelete={onBookshelfDelete} 
+                bookshelfValue={bookshelfValue} />
         </>
     );
 };
