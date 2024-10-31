@@ -4,9 +4,11 @@ import Search from "./Components/Search/Search";
 import {ChangeEvent, SyntheticEvent, useState} from "react";
 import {Book} from "./library";
 import {searchBooks} from "./api";
+import ListBookshelf from "./Components/Bookshelf/ListBookshelf/ListBookshelf";
 
 function App() {
     const [search, setSearch] = useState<string>("")
+    const [bookshelfValues, setBookshelfValues] = useState<string[]>([]); // ["wantToRead", "currentlyReading"
     const [searchResult, setSearchResult] = useState<Book[]>([]);
     const [serverError, setServerError] = useState<string>("");
     
@@ -15,9 +17,10 @@ function App() {
         console.log(e);
     };
     
-    const onBookshelfCreate = (e: SyntheticEvent) => {
+    const onBookshelfCreate = (e: any) => {
         e.preventDefault();
-        console.log(e)
+        const updatedBookshelf = [...bookshelfValues, e.target[0].value]
+        setBookshelfValues(updatedBookshelf);
     }  
     
     const onSearchSubmit = async (e: SyntheticEvent) => {
@@ -33,8 +36,9 @@ function App() {
     
     return (
         <div className="App">
-            <Search onSearchSubmit={onSearchSubmit} search={search} handleSearchChange={handleSearchChange} />
             {serverError && <h1>{serverError}</h1>}
+            <Search onSearchSubmit={onSearchSubmit} search={search} handleSearchChange={handleSearchChange} />
+            <ListBookshelf bookshelfValues={bookshelfValues}/>
             <BookList searchResults={searchResult} onBookshelfCreate={onBookshelfCreate}/>
         </div>
   );
