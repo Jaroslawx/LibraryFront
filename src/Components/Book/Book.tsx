@@ -10,29 +10,27 @@ interface Props {
 }
 
 const Book: React.FC<Props> = ({ id, searchResult, onBookshelfCreate }: Props) : JSX.Element => {
-  return (
-      <div className="book">
-          {searchResult.cover?.large && (
-              <img
-                  src={searchResult.cover.large}
-                  alt={`Cover of ${searchResult.title}`}
-              />
-          )}
-          <div className="details">
-              <h2>{searchResult.title}</h2>
-              {searchResult.author_name && (
-                  <p>{searchResult.author_name.join(", ")}</p>
-              )}
-          </div>
-          {searchResult.description && (
-              <p className="info">{searchResult.description}</p>
-          )}
-          <AddBookshelf 
-              onBookshelfCreate={onBookshelfCreate}
-              title={searchResult.title}
-          />
-      </div>
-  );
+    return (
+        <div className="book w-60 p-4 m-3 bg-lightBlue rounded-lg shadow-card transition-transform transform hover:-translate-y-1 hover:shadow-lg">
+            {searchResult.cover?.large && (
+                <img
+                    src={searchResult.cover.large}
+                    alt={`Cover of ${searchResult.title}`}
+                    className="w-full h-auto rounded-md mb-3"
+                />
+            )}
+            <div className="details text-center">
+                <h2 className="text-lg font-semibold text-grayDark mb-2">{searchResult.title}</h2>
+                {searchResult.author_name && (
+                    <p className="text-sm text-grayDark">{searchResult.author_name.join(", ")}</p>
+                )}
+            </div>
+            {searchResult.description && (
+                <p className="info text-sm text-gray-600 mt-3 text-center">{searchResult.description}</p>
+            )}
+            <AddBookshelf onBookshelfCreate={onBookshelfCreate} title={searchResult.title} />
+        </div>
+    );
 };
 
 export default Book
