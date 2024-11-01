@@ -5,6 +5,8 @@ import {ChangeEvent, SyntheticEvent, useState} from "react";
 import {Book} from "./library";
 import {searchBooks} from "./api";
 import ListBookshelf from "./Components/Bookshelf/ListBookshelf/ListBookshelf";
+import Navbar from "./Components/Navbar/Navbar";
+import Hero from "./Components/Hero/Hero";
 
 function App() {
     const [search, setSearch] = useState<string>("")
@@ -46,6 +48,8 @@ function App() {
     
     return (
         <div className="App">
+            <Navbar />
+            <Hero />
             {serverError && <h1>{serverError}</h1>}
             <Search 
                 onSearchSubmit={onSearchSubmit} 
