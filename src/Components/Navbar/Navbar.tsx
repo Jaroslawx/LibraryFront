@@ -6,7 +6,7 @@ interface Props {}
 const Navbar: React.FC<Props> = () => {
     return (
         <nav className="navbar">
-            <div className="navbar-logo">Library</div>
+            <div className="navbar-logo">BookNest</div>
             <ul className="navbar-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/books">Books</a></li>
