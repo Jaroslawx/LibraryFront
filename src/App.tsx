@@ -49,7 +49,7 @@ function App() {
     return (
         <div className="App">
             <Navbar />
-            <Hero />
+            {/*<Hero />*/}
             {serverError && <h1>{serverError}</h1>}
             <Search 
                 onSearchSubmit={onSearchSubmit} 

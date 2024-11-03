@@ -20,9 +20,16 @@ const Navbar: React.FC<Props> = () => {
                 <li><a href="/bookshelves" className="hover:text-yellow-500">Bookshelves</a></li>
                 <li><a href="/about" className="hover:text-yellow-500">About</a></li>
             </ul>
-            <button className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded">
-                Login
-            </button>
+            <div className="flex space-x-4">
+                <button
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transform hover:scale-105 transition duration-200">
+                    Sign In
+                </button>
+                <button
+                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transform hover:scale-105 transition duration-200">
+                    Sign Up
+                </button>
+            </div>
         </nav>
 
     );
