@@ -1,21 +1,23 @@
 import React from "react";
 import "./Navbar.css";
+import {Link} from "react-router-dom";
 
 interface Props {}
 
 const Navbar: React.FC<Props> = () => {
     return (
         <nav className="flex justify-between items-center bg-gray-800 p-4 text-white">
-            <div className="flex items-center space-x-3">
+            <Link to="/" className="flex items-center space-x-3">
                 <img
                     src="https://res.cloudinary.com/ggeztrw22/image/upload/v1730534937/Library/aferpbynnxe5o9bepwps.png"
                     alt="BookNest logo"
                     className="w-20 h-20"
                 />
                 <span className="text-2xl font-bold">BookNest</span>
-            </div>
+            </Link>
             <ul className="flex space-x-6">
-                <li><a href="/" className="hover:text-yellow-500">Home</a></li>
+                <li><Link to="/" className="hover:text-yellow-500">Home</Link></li>
+                <li><Link to="/search" className="hover:text-yellow-500">Search</Link></li>
                 <li><a href="/books" className="hover:text-yellow-500">Books</a></li>
                 <li><a href="/bookshelves" className="hover:text-yellow-500">Bookshelves</a></li>
                 <li><a href="/about" className="hover:text-yellow-500">About</a></li>

@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 interface Props {}
 
@@ -10,9 +11,9 @@ const Hero = (props: Props) => {
                 Discover, explore, and manage your favorite books all in one place. BookNest is your personal library in the cloud.
             </p>
             <div className="flex space-x-4">
-                <a href="/books" className="bg-yellow-500 hover:bg-yellow-600 text-white py-3 px-6 rounded-lg text-lg transform hover:scale-105 transition duration-200">
+                <Link to='/search' className="bg-yellow-500 hover:bg-yellow-600 text-white py-3 px-6 rounded-lg text-lg transform hover:scale-105 transition duration-200">
                     Browse Books
-                </a>
+                </Link>
                 <a href="/signup" className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-lg text-lg transform hover:scale-105 transition duration-200">
                     Get Started
                 </a>

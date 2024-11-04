@@ -2,6 +2,7 @@
 import "./Book.css";
 import { Book as BookType } from "../../library";
 import AddBookshelf from "../Bookshelf/AddBookshelf/AddBookshelf";
+import {Link} from "react-router-dom";
 
 interface Props {
     id: string;
@@ -20,7 +21,7 @@ const Book: React.FC<Props> = ({ id, searchResult, onBookshelfCreate }: Props) :
                 />
             )}
             <div className="details text-center">
-                <h2 className="text-lg font-semibold text-grayDark mb-2">{searchResult.title}</h2>
+                <Link to={`/book/${searchResult.title}`} className="text-lg font-semibold text-grayDark mb-2">{searchResult.title}</Link>
                 {searchResult.author_name && (
                     <p className="text-sm text-grayDark">{searchResult.author_name.join(", ")}</p>
                 )}

@@ -1,5 +1,6 @@
 import React, {SyntheticEvent} from "react";
 import DeleteBookshelf from "../DeleteBookshelf/DeleteBookshelf";
+import {Link} from "react-router-dom";
 
 interface Props {
     bookshelfValue: string;
@@ -9,7 +10,7 @@ interface Props {
 const BookBookshelf = ({bookshelfValue, onBookshelfDelete}: Props) => {
     return (
         <>
-            <h4>{bookshelfValue}</h4>
+            <Link to={`/book/${bookshelfValue}`}>{bookshelfValue}</Link>
             <DeleteBookshelf 
                 onBookshelfDelete={onBookshelfDelete} 
                 bookshelfValue={bookshelfValue} />
