@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Book } from "./library";
+import {Book, BookDetails} from "./library";
 
 interface SearchResponse {
     docs: Book[];
@@ -22,4 +22,22 @@ export const searchBooks = async (query: string): Promise<Book[] | string>=> {
             return "An unexpected error occurred.";
         }
     } 
+}
+
+export const getBookDetails = async (query: string) => {
+    try {
+        const response = await axios.get<{ [key: string]: BookDetails }>(
+            `https://openlibrary.org/api/books?bibkeys=OLID:${query}&format=json&jscmd=data`
+        );
+        const data = response.data[query]; // Access the specific book data using the key
+        return data ? data : "Book not found!";
+    } catch (error: any) {
+        if (axios.isAxiosError(error)) {
+            console.log("error message from API: ", error.message);
+            return error.message;
+        } else {
+            console.log("unexpected error: ", error);
+            return "An unexpected error occurred.";
+        }
+    }
 }
