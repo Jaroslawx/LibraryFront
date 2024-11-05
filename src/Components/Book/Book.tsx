@@ -21,7 +21,8 @@ const Book: React.FC<Props> = ({ id, searchResult, onBookshelfCreate }: Props) :
                 />
             )}
             <div className="details text-center">
-                <Link to={`/book/${searchResult.key.replace('/works/', '')}`} className="text-lg font-semibold text-grayDark mb-2">{searchResult.title}</Link>
+                {/* eg. id = /works/OL82563W */}
+                <Link to={`/book/${id.replace("/works/", "")}`} className="text-lg font-semibold text-grayDark mb-2">{searchResult.title}</Link>
                 {searchResult.author_name && (
                     <p className="text-sm text-grayDark">{searchResult.author_name.join(", ")}</p>
                 )}
