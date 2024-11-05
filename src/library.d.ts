@@ -25,25 +25,13 @@ export interface Cover {
     large: string;               // Link to large cover image
 }
 
-export interface BookDetails {
-    key: string;                   // Book key in Open Library
-    title: string;                 // Book title
-    author_name?: string[];        // List of authors of the book
-    author_key?: string[];         // Keys of authors in Open Library
-    publish_year?: number[];       // Year of publication
-    first_publish_year?: number;   // Year of first publication
-    isbn?: string[];               // List of ISBNs
-    number_of_pages_median?: number; // Median number of pages
-    cover?: Cover;                 // Cover image
-    subjects?: string[];           // Subjects related to the book
-    description?: string;     // Subjects related to the book
-    publishers?: string[];           // Publishers of the book
-    publish_places?: string[];       // Places of publication
-    languages?: { key: string }[];   // Languages the book is available in
-    number_of_pages?: number;        // Total number of pages
-    created?: { type: string, value: string }; // Creation timestamp
-    last_modified?: { type: string, value: string }; // Last modification timestamp
-    cover_edition_key?: string;      // Key for the cover edition
+interface BookDetails {
+    title: string;
+    authors: { name: string }[];
+    publish_date: string;
+    subjects: string[];
+    description?: string;
+    cover?: { large: string };
 }
 
 export interface Author {
