@@ -21,13 +21,15 @@ const BookPage = (props: Props) => {
                     setBookDetails(bookData);
                     
                     if (bookData.authors) {
-                        const keys = bookData.authors.map((authorObj) => {
+                        const keys = bookData.authors?.map((authorObj) => {
                             console.log('authorObj:', authorObj); // Logowanie dla debugowania
-                            return authorObj.key || 'Unknown key'; // Poprawnie odwołujemy się do key
+                            return authorObj.author?.key || 'Unknown key';
                         });
                         setAuthorKeys(keys);
-                        
+
                         console.log('keys:', keys);
+
+                        
                     }
                 }
             } catch (error) {

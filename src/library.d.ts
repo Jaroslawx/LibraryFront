@@ -19,7 +19,9 @@ export interface BookDetails {
 }
 
 export interface Author {
-    key: string;
+    author: {
+        key: string;
+    };
 }
 
 export interface AuthorName {
