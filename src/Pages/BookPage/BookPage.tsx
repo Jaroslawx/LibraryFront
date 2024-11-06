@@ -23,7 +23,7 @@ const BookPage = (props: Props) => {
                     
                     if (bookData.authors) {
                         const keys = bookData.authors?.map((authorObj) => {
-                            console.log('authorObj:', authorObj); // Logowanie dla debugowania
+                            console.log('authorObj:', authorObj);
                             return authorObj.author?.key || 'Unknown key';
                         });
                         setAuthorKeys(keys);
@@ -46,17 +46,15 @@ const BookPage = (props: Props) => {
                 const names = await Promise.all(
                     authorKeys.map(async (authorKey) => {
                         const authorNames = await getAuthorName(authorKey);
-
-                        // Jeśli otrzymamy tablicę imion, zwrócimy je
+                        
                         if (authorNames) {
-                            return authorNames; // Zwracamy tablicę imion
+                            return authorNames;
                         }
-                        return ['Unknown Author']; // Domyślnie, jeśli nie ma imienia
+                        return ['Unknown Author'];
                     })
                 );
 
-                // Ustawiamy wszystkie imiona autorów w stanie
-                setAuthorNames(names.flat()); // Używamy .flat() do spłaszczenia tablicy
+                setAuthorNames(names.flat());
 
             } catch (error) {
                 console.error('Error fetching author names:', error);
