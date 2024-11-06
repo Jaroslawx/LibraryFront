@@ -31,11 +31,23 @@ const BookPage = (props: Props) => {
     return (
         <div>
             <h1>{bookDetails.title}</h1>
-            {/*<p>Authors: {bookDetails.authors.map((author) => author.name).join(', ')}</p>*/}
-            {/*<p>Publication date: {bookDetails.publish_date}</p>*/}
-            {/*<p>Subjects: {bookDetails.subjects.join(', ')}</p>*/}
-            {/*{bookDetails.description && <p>Description: {bookDetails.description}</p>}*/}
-            {/*{bookDetails.cover && <img src={bookDetails.cover.large} alt={bookDetails.title}/>}*/}
+            <p>Authors: {bookDetails.authors.map((author) => author.name).join(', ')}</p>
+            <p>Publication date: {bookDetails.publish_date}</p>
+            <p>Subjects: {bookDetails.subjects.slice(0, 5).join(', ')}</p>
+            {bookDetails.description && (
+                <p>
+                    Description: {
+                    typeof bookDetails.description === 'string'
+                        ? bookDetails.description.split(/(\[source\]|\(\[source\])/i)[0]
+                        : (bookDetails.description as { value: string }).value.split(/(\[source\]|\(\[source\])/i)[0]
+                }
+                </p>
+            )}
+            <div>
+                Cover: {bookDetails.cover && (
+                <img src={bookDetails.cover.large} alt={bookDetails.title}/>
+            )}
+            </div>
         </div>
     );
 };

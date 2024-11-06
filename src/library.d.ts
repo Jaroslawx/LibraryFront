@@ -30,7 +30,7 @@ interface BookDetails {
     authors: { name: string }[];
     publish_date: string;
     subjects: string[];
-    description?: string;
+    description?: string | { value: string };
     cover?: { large: string };
 }
 
