@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { useParams} from "react-router";
 import {getAuthorName, getWorkDetails} from "../../api";
-import {Author, BookDetails} from "../../library";
-import book from "../../Components/Book/Book";
+import {AuthorName, BookDetails} from "../../library";
 
 interface Props {}
 
@@ -10,7 +9,7 @@ const BookPage = (props: Props) => {
     const { bookId } = useParams<{ bookId: string }>();
     const [bookDetails, setBookDetails] = useState<BookDetails | null>(null);
     const [authorKeys, setAuthorKeys] = useState<string[]>([]);
-    const [authorNames, setAuthorNames] = useState<Author[]>([]);
+    const [authorNames, setAuthorNames] = useState<AuthorName[]>([]);
 
     useEffect(() => {
         const fetchBook = async () => {
@@ -22,22 +21,13 @@ const BookPage = (props: Props) => {
                     setBookDetails(bookData);
                     
                     if (bookData.authors) {
-                        const keys = bookData.authors.map((authorObj) => authorObj.key);
+                        const keys = bookData.authors.map((authorObj) => {
+                            console.log('authorObj:', authorObj); // Logowanie dla debugowania
+                            return authorObj.key || 'Unknown key'; // Poprawnie odwołujemy się do key
+                        });
                         setAuthorKeys(keys);
                         
                         console.log('keys:', keys);
-
-                        const authors = await Promise.all(
-                            bookData.authors.map(async (authorObj) => {
-                                if (authorObj?.key) {
-                                    const author = await getAuthorName(authorObj.key);
-                                    return author || { personal_name: 'Unknown Author', key: '' };
-                                } else {
-                                    return { personal_name: 'Unknown Author', key: '' };
-                                }
-                            })
-                        );
-                        setAuthorNames(authors);
                     }
                 }
             } catch (error) {
@@ -50,9 +40,9 @@ const BookPage = (props: Props) => {
 
     if (!bookDetails) return <div>Loading...</div>;
     if (bookDetails) {
-        console.log(bookDetails);
-        console.log(bookDetails?.authors);
-        console.log(authorNames);
+        // console.log(bookDetails);
+        // console.log(bookDetails?.authors);
+        // console.log(authorNames);
     }
     
     return (

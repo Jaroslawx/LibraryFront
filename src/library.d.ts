@@ -9,16 +9,20 @@ export interface Book {
     description?: string;
 }
 
-interface BookDetails {
+export interface BookDetails {
     key: string;
     title: string;
-    authors?: { key: string }[];
+    authors?: Author[];
     subjects: string[];
     description?: string | { value: string };
     cover?: { large: string };
 }
 
 export interface Author {
+    key: string;
+}
+
+export interface AuthorName {
     personal_name: string;
 }
 

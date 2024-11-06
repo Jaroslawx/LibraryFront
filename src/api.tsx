@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {Author, Book, BookDetails} from "./library";
+import {AuthorName, Book, BookDetails} from "./library";
 
 interface SearchResponse {
     docs: Book[];
@@ -42,9 +42,9 @@ export const getWorkDetails = async (workId: string): Promise<BookDetails | stri
     }
 }
 
-export const getAuthorName = async (authorKey: string): Promise<Author | null> => {
+export const getAuthorName = async (authorKey: string): Promise<AuthorName | null> => {
     try {
-        const response = await axios.get<Author>(
+        const response = await axios.get<AuthorName>(
             `https://openlibrary.org${authorKey}.json`
         );
         return response.data;
