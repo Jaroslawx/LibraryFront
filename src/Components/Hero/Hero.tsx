@@ -5,7 +5,7 @@ interface Props {}
 
 const Hero = (props: Props) => {
     return (
-        <div className="bg-cover bg-center h-screen text-white flex flex-col justify-center items-center" style={{ backgroundImage: 'url("")' }}>
+        <div className="bg-cover bg-center h-screen text-black flex flex-col justify-center items-center" style={{ backgroundImage: 'url("")' }}>
             <h1 className="text-5xl font-bold mb-4">Welcome to BookNest</h1>
             <p className="text-lg mb-8 text-center max-w-lg">
                 Discover, explore, and manage your favorite books all in one place. BookNest is your personal library in the cloud.
