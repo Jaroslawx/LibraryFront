@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { useParams} from "react-router";
 import {getAuthorName, getWorkDetails} from "../../api";
-import {AuthorName, BookDetails} from "../../library";
+import {BookDetails} from "../../library";
 
 interface Props {}
 
@@ -9,8 +9,9 @@ const BookPage = (props: Props) => {
     const { bookId } = useParams<{ bookId: string }>();
     const [bookDetails, setBookDetails] = useState<BookDetails | null>(null);
     const [authorKeys, setAuthorKeys] = useState<string[]>([]);
-    const [authorNames, setAuthorNames] = useState<AuthorName[]>([]);
+    const [authorNames, setAuthorNames] = useState<string[]>([]);
 
+    // Get book details
     useEffect(() => {
         const fetchBook = async () => {
             try {
@@ -28,8 +29,6 @@ const BookPage = (props: Props) => {
                         setAuthorKeys(keys);
 
                         console.log('keys:', keys);
-
-                        
                     }
                 }
             } catch (error) {
@@ -39,7 +38,36 @@ const BookPage = (props: Props) => {
 
         fetchBook();
     }, [bookId]);
+    
+    // Get author names
+    useEffect(() => {
+        const fetchAuthorNames = async () => {
+            try {
+                const names = await Promise.all(
+                    authorKeys.map(async (authorKey) => {
+                        const authorNames = await getAuthorName(authorKey);
 
+                        // Jeśli otrzymamy tablicę imion, zwrócimy je
+                        if (authorNames) {
+                            return authorNames; // Zwracamy tablicę imion
+                        }
+                        return ['Unknown Author']; // Domyślnie, jeśli nie ma imienia
+                    })
+                );
+
+                // Ustawiamy wszystkie imiona autorów w stanie
+                setAuthorNames(names.flat()); // Używamy .flat() do spłaszczenia tablicy
+
+            } catch (error) {
+                console.error('Error fetching author names:', error);
+            }
+        };
+
+        if (authorKeys.length > 0) {
+            fetchAuthorNames();
+        }
+    }, [authorKeys]);
+    
     if (!bookDetails) return <div>Loading...</div>;
     if (bookDetails) {
         // console.log(bookDetails);
@@ -53,11 +81,12 @@ const BookPage = (props: Props) => {
             <p>
                 Authors: {authorNames.length > 0 ? authorNames.join(', ') : 'No authors available'}
             </p>
-            <p>
-                AuthorsKeys: {bookDetails?.authors?.map((authorKey: any) => {
-                return authorKey.author ? authorKey.author.key : 'Unknown Author';
-            }).join(', ') || 'No authors available'}
-            </p>
+            
+            {/*<p>*/}
+            {/*    AuthorsKeys: {bookDetails?.authors?.map((authorKey: any) => {*/}
+            {/*    return authorKey.author ? authorKey.author.key : 'Unknown Author';*/}
+            {/*    }).join(', ') || 'No authors available'}*/}
+            {/*</p>*/}
 
             <p>Subjects: {bookDetails.subjects.slice(0, 5).join(', ')}</p>
             {bookDetails.description && (

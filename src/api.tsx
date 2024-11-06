@@ -42,18 +42,20 @@ export const getWorkDetails = async (workId: string): Promise<BookDetails | stri
     }
 }
 
-export const getAuthorName = async (authorKey: string): Promise<AuthorName | null> => {
+export const getAuthorName = async (authorKey: string): Promise<string[] | null> => {
     try {
-        const response = await axios.get<AuthorName>(
-            `https://openlibrary.org${authorKey}.json`
-        );
-        return response.data;
+        const response = await axios.get<AuthorName>(`https://openlibrary.org${authorKey}.json`);
+        if (response.data) {
+            return [response.data.personal_name || 'Unknown Author'];
+        }
         
+        return null;
     } catch (error) {
         console.error('Error fetching author details:', error);
         return null;
     }
 };
+
 
 
 
