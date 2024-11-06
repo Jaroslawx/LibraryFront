@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {Book, BookDetails} from "./library";
+import {Author, Book, BookDetails} from "./library";
 
 interface SearchResponse {
     docs: Book[];
@@ -24,31 +24,13 @@ export const searchBooks = async (query: string): Promise<Book[] | string>=> {
     } 
 }
 
-export const getBookDetails = async (olid: string): Promise<BookDetails | string> => {
-    try {
-        const response = await axios.get<{ [key: string]: BookDetails }>(
-            `https://openlibrary.org/api/books?bibkeys=OLID:${olid}&format=json&jscmd=data`
-        );
-        
-        const bookData = response.data[`OLID:${olid}`];
-        return bookData || "Book not found!";
-    } catch (error: any) {
-        if (axios.isAxiosError(error)) {
-            console.log("Error message from API: ", error.message);
-            throw new Error(error.message);
-        } else {
-            console.log("unexpected error: ", error);
-            throw new Error("An unexpected error occurred.");
-        }
-    }
-}
-
 export const getWorkDetails = async (workId: string): Promise<BookDetails | string> => {
     try {
         const response = await axios.get<BookDetails>(
             `https://openlibrary.org/works/${workId}.json`
         );
         return response.data;
+        
     } catch (error) {
         if (axios.isAxiosError(error)) {
             console.error("Error message from API:", error.message);
@@ -59,3 +41,19 @@ export const getWorkDetails = async (workId: string): Promise<BookDetails | stri
         }
     }
 }
+
+export const getAuthorName = async (authorKey: string): Promise<Author | null> => {
+    try {
+        const response = await axios.get<Author>(
+            `https://openlibrary.org${authorKey}.json`
+        );
+        return response.data;
+        
+    } catch (error) {
+        console.error('Error fetching author details:', error);
+        return null;
+    }
+};
+
+
+
