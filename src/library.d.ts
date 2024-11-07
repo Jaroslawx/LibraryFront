@@ -14,7 +14,7 @@ export interface BookDetails {
     authors?: Author[];
     subjects: string[];
     description?: string | { value: string };
-    cover?: Cover;
+    covers?: number[];
 }
 
 export interface Author {
@@ -25,11 +25,4 @@ export interface Author {
 
 export interface AuthorName {
     personal_name: string;
-}
-
-export interface Cover {
-    key: string;
-    small: string;
-    medium: string;
-    large: string;
 }

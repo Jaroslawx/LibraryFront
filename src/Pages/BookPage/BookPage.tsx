@@ -68,40 +68,47 @@ const BookPage = (props: Props) => {
     
     if (!bookDetails) return <div>Loading...</div>;
     if (bookDetails) {
-        // console.log(bookDetails);
-        // console.log(bookDetails?.authors);
+        console.log(bookDetails);
         // console.log(authorNames);
     }
     
     return (
-        <div>
-            <h1>{bookDetails.title}</h1>
-            <p>
-                Authors: {authorNames.length > 0 ? authorNames.join(', ') : 'No authors available'}
-            </p>
+        <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-6">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">{bookDetails.title}</h1>
+
+            {/* Cover Image */}
+            {bookDetails.covers && bookDetails.covers.length > 0 && (
+                <img
+                    src={`https://covers.openlibrary.org/b/id/${bookDetails.covers[0]}-L.jpg`}
+                    alt={`Cover of ${bookDetails.title}`}
+                    className="mx-auto rounded-lg shadow-md"
+                />
+            )}
             
+            <p className="text-lg text-gray-700 mb-3">
+                <strong>Authors:</strong> {authorNames.length > 0 ? authorNames.join(', ') : 'No authors available'}
+            </p>
+
             {/*<p>*/}
             {/*    AuthorsKeys: {bookDetails?.authors?.map((authorKey: any) => {*/}
             {/*    return authorKey.author ? authorKey.author.key : 'Unknown Author';*/}
             {/*    }).join(', ') || 'No authors available'}*/}
             {/*</p>*/}
 
-            <p>Subjects: {bookDetails.subjects.slice(0, 5).join(', ')}</p>
+            <p className="text-lg text-gray-700 mb-3">
+                <strong>Subjects:</strong> {bookDetails.subjects.slice(0, 5).join(', ')}
+            </p>
+
             {bookDetails.description && (
-                <p>
-                    Description: {
+                <p className="text-lg text-gray-600 mb-3">
+                    <strong>Description:</strong> {
                     typeof bookDetails.description === 'string'
                         ? bookDetails.description.split(/(\[source]|\(\[source])/i)[0]
                         : (bookDetails.description as { value: string }).value.split(/(\[source]|\(\[source])/i)[0]
                 }
                 </p>
             )}
-
-            <div>
-                Cover: {bookDetails.cover && (
-                <img src={bookDetails.cover.large} alt={bookDetails.title}/>
-            )}
-            </div>
+            
         </div>
     );
 };
