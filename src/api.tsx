@@ -1,11 +1,11 @@
 import axios from 'axios';
-import {AuthorName, Book, BookDetails} from "./library";
+import {AuthorName, BookSearch, BookDetails} from "./library";
 
 interface SearchResponse {
-    docs: Book[];
+    docs: BookSearch[];
 }
 
-export const searchBooks = async (query: string): Promise<Book[] | string>=> {
+export const searchBooks = async (query: string): Promise<BookSearch[] | string>=> {
     try {
         const response= await axios.get<SearchResponse>(
             `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}`

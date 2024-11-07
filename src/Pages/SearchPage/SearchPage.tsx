@@ -3,7 +3,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import Search from "../../Components/Search/Search";
 import ListBookshelf from "../../Components/Bookshelf/ListBookshelf/ListBookshelf";
 import BookList from "../../Components/BookList/BookList";
-import {Book} from "../../library";
+import {BookSearch} from "../../library";
 import {searchBooks} from "../../api";
 
 interface Props {}
@@ -11,12 +11,12 @@ interface Props {}
 const SearchPage = (props: Props) => {
     const [search, setSearch] = useState<string>("")
     const [bookshelfValues, setBookshelfValues] = useState<string[]>([]);
-    const [searchResult, setSearchResult] = useState<Book[]>([]);
+    const [searchResult, setSearchResult] = useState<BookSearch[]>([]);
     const [serverError, setServerError] = useState<string>("");
 
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
-        console.log(e);
+        // console.log(e);
     };
 
     const onBookshelfCreate = (e: any) => {

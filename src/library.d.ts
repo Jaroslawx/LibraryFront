@@ -1,12 +1,11 @@
 // library.d.ts
-export interface Book {
+export interface BookSearch {
     key: string;
     title: string;
     author_name?: string[];
     author_key?: string[];
     cover?: Cover;
     subjects?: string[];
-    description?: string;
 }
 
 export interface BookDetails {
@@ -15,7 +14,7 @@ export interface BookDetails {
     authors?: Author[];
     subjects: string[];
     description?: string | { value: string };
-    cover?: { large: string };
+    cover?: Cover;
 }
 
 export interface Author {

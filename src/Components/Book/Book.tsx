@@ -1,12 +1,12 @@
 ﻿import React, { SyntheticEvent } from "react";
 import "./Book.css";
-import { Book as BookType } from "../../library";
+import { BookSearch } from "../../library";
 import AddBookshelf from "../Bookshelf/AddBookshelf/AddBookshelf";
 import {Link} from "react-router-dom";
 
 interface Props {
     id: string;
-    searchResult: BookType;
+    searchResult: BookSearch;
     onBookshelfCreate: (e: SyntheticEvent) => void;
 }
 
@@ -32,9 +32,6 @@ const Book: React.FC<Props> = ({ id, searchResult, onBookshelfCreate }: Props) :
                     <p className="text-sm text-grayDark">{searchResult.author_name.join(", ")}</p>
                 )}
             </div>
-            {searchResult.description && (
-                <p className="info text-sm text-gray-600 mt-3 text-center">{searchResult.description}</p>
-            )}
             <AddBookshelf onBookshelfCreate={onBookshelfCreate} title={searchResult.title} />
         </div>
     );
