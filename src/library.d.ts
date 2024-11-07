@@ -4,7 +4,7 @@ export interface BookSearch {
     title: string;
     author_name?: string[];
     author_key?: string[];
-    cover?: Cover;
+    cover_i?: string;
     subjects?: string[];
 }
 

@@ -13,9 +13,9 @@ interface Props {
 const Book: React.FC<Props> = ({ id, searchResult, onBookshelfCreate }: Props) : JSX.Element => {
     return (
         <div className="book w-60 p-4 m-3 bg-lightBlue rounded-lg shadow-card transition-transform transform hover:-translate-y-1 hover:shadow-lg">
-            {searchResult.cover?.large && (
+            {searchResult.cover_i && (
                 <img
-                    src={searchResult.cover.large}
+                    src={`https://covers.openlibrary.org/b/id/${searchResult.cover_i}.jpg`}
                     alt={`Cover of ${searchResult.title}`}
                     className="w-full h-auto rounded-md mb-3"
                 />
