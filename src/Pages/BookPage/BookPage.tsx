@@ -108,7 +108,6 @@ const BookPage = (props: Props) => {
                 }
                 </p>
             )}
-            
         </div>
     );
 };
