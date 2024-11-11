@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import { useParams} from "react-router";
-import {getAuthorName, getWorkDetails} from "../../api";
+import {getAuthorName, getPublishDate, getWorkDetails} from "../../api";
 import {BookDetails} from "../../library";
+import book from "../../Components/Book/Book";
 
 interface Props {}
 
@@ -10,6 +11,7 @@ const BookPage = (props: Props) => {
     const [bookDetails, setBookDetails] = useState<BookDetails | null>(null);
     const [authorKeys, setAuthorKeys] = useState<string[]>([]);
     const [authorNames, setAuthorNames] = useState<string[]>([]);
+    const [publishDate, setPublishDate] = useState<string | null>(null);
 
     // Get book details
     useEffect(() => {
@@ -66,9 +68,26 @@ const BookPage = (props: Props) => {
         }
     }, [authorKeys]);
     
+    // Get publish date
+    useEffect(() => {
+        const fetchPublishDate = async () => {
+            try {
+                const date = await getPublishDate(bookId as string);
+                if (date) {
+                    setPublishDate(date);
+                }
+            } catch (error) {
+                console.error('Error fetching publish date:', error);
+            }
+        };
+
+        fetchPublishDate();
+    });
+    
     if (!bookDetails) return <div>Loading...</div>;
     if (bookDetails) {
         console.log(bookDetails);
+        console.log(publishDate);
         // console.log(authorNames);
     }
     
@@ -84,9 +103,13 @@ const BookPage = (props: Props) => {
                     className="mx-auto rounded-lg shadow-md"
                 />
             )}
-            
+
             <p className="text-lg text-gray-700 mb-3">
                 <strong>Authors:</strong> {authorNames.length > 0 ? authorNames.join(', ') : 'No authors available'}
+            </p>
+
+            <p className="text-lg text-gray-700 mb-3">
+                <strong>Publish Date:</strong> {publishDate || 'Not available'}
             </p>
 
             {/*<p>*/}

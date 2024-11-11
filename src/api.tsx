@@ -5,6 +5,15 @@ interface SearchResponse {
     docs: BookSearch[];
 }
 
+interface Edition {
+    publish_date?: string;
+    key: string;
+}
+
+interface EditionsResponse {
+    entries: Edition[];
+}
+
 export const searchBooks = async (query: string): Promise<BookSearch[] | string>=> {
     try {
         const response= await axios.get<SearchResponse>(
@@ -38,6 +47,35 @@ export const getWorkDetails = async (workId: string): Promise<BookDetails | stri
         } else {
             console.error("Unexpected error:", error);
             throw new Error("An unexpected error occurred.");
+        }
+    }
+}
+
+export const getPublishDate = async (workId: string): Promise<string | null> => {
+    try {
+        {
+            const response = await axios.get<EditionsResponse>(
+                `https://openlibrary.org/works/${workId}/editions.json`
+            );
+
+            // Extract all publish dates and filter out any undefined/null values
+            const publishDates = response.data.entries
+                .map(entry => entry.publish_date)
+                .filter(date => date !== undefined && date !== null);
+
+            // Sort dates to find the oldest one, using a fallback to handle undefined values
+            publishDates.sort((a, b) => new Date(a || "").getTime() - new Date(b || "").getTime());
+
+            // Return the oldest date or null if no dates are found
+            return publishDates[0] || null;
+        }
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.error("Error fetching editions:", error.message);
+            return null;
+        } else {
+            console.error("Unexpected error:", error);
+            return null;
         }
     }
 }
