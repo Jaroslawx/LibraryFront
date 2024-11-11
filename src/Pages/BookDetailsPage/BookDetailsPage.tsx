@@ -6,7 +6,7 @@ import book from "../../Components/Book/Book";
 
 interface Props {}
 
-const BookPage = (props: Props) => {
+const BookDetailsPage = (props: Props) => {
     const { bookId } = useParams<{ bookId: string }>();
     const [bookDetails, setBookDetails] = useState<BookDetails | null>(null);
     const [authorKeys, setAuthorKeys] = useState<string[]>([]);
@@ -86,8 +86,8 @@ const BookPage = (props: Props) => {
     
     if (!bookDetails) return <div>Loading...</div>;
     if (bookDetails) {
-        console.log(bookDetails);
-        console.log(publishDate);
+        // console.log(bookDetails);
+        // console.log(publishDate);
         // console.log(authorNames);
     }
     
@@ -135,4 +135,4 @@ const BookPage = (props: Props) => {
     );
 };
 
-export default BookPage; 
+export default BookDetailsPage; 
