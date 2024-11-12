@@ -4,6 +4,7 @@ import HomePage from "../Pages/HomePage/HomePage";
 import SearchPage from "../Pages/SearchPage/SearchPage";
 import BookDetailsPage from "../Pages/BookDetailsPage/BookDetailsPage";
 import DesignPage from "../Pages/DesignPage/DesignPage";
+import BookShelfPage from "../Pages/Bookshelf/BookShelfPage";
 
 export const router = createBrowserRouter([
     {
@@ -14,6 +15,7 @@ export const router = createBrowserRouter([
             {path: "search", element: <SearchPage /> },
             {path: "design-guide", element: <DesignPage /> },
             {path: "book/:bookId", element: <BookDetailsPage /> },
+            { path: "bookshelf", element: <BookShelfPage /> },
         ]
     }
 ])

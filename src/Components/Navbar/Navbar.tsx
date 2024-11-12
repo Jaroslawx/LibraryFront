@@ -19,7 +19,7 @@ const Navbar: React.FC<Props> = () => {
                 <li><Link to="/" className="hover:text-yellow-500">Home</Link></li>
                 <li><Link to="/search" className="hover:text-yellow-500">Search</Link></li>
                 <li><a href="/books" className="hover:text-yellow-500">Books</a></li>
-                <li><a href="/bookshelves" className="hover:text-yellow-500">Bookshelves</a></li>
+                <li><a href="/bookshelf" className="hover:text-yellow-500">Bookshelf</a></li>
                 <li><a href="/about" className="hover:text-yellow-500">About</a></li>
             </ul>
             <div className="flex space-x-4">
