@@ -60,6 +60,14 @@ const BookShelfPage = (props: Props) => {
                 {activeTab === 'read' && <div className="text-gray-700">Books you have read.</div>}
                 {activeTab === 'neverRead' && <div className="text-gray-700">Books you never plan to read.</div>}
             </div>
+            
+            {/* in the future */}
+            {/*<div className="tab-content text-center p-6 bg-white rounded-lg shadow-md">*/}
+            {/*    {activeTab === 'planToRead' && <PlanToReadBooks/>}*/}
+            {/*    {activeTab === 'currentlyReading' && <CurrentlyReadingBooks/>}*/}
+            {/*    {activeTab === 'read' && <ReadBooks/>}*/}
+            {/*    {activeTab === 'neverRead' && <NeverReadBooks/>}*/}
+            {/*</div>*/}
         </div>
     );
 };
