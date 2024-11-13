@@ -92,6 +92,16 @@ export const getAuthorName = async (authorKey: string): Promise<string[] | null>
     }
 };
 
+export const getAuthorBooks = async (authorKey: string): Promise<any[] | null> => {
+    try {
+        const response = await axios.get(`https://openlibrary.org${authorKey}/works.json`);
+        return response.data.entries.slice(0, 4);
+    } catch (error) {
+        console.error("Error fetching author books:", error);
+        return null;
+    }
+};
+
 
 
 
