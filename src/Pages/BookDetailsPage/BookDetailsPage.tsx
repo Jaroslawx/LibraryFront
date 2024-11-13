@@ -3,6 +3,7 @@ import { useParams} from "react-router";
 import {getAuthorName, getPublishDate, getWorkDetails} from "../../api";
 import {BookDetails} from "../../library";
 import book from "../../Components/Book/Book";
+import Spinner from "../../Components/Spinner/Spinner";
 
 interface Props {}
 
@@ -84,7 +85,7 @@ const BookDetailsPage = (props: Props) => {
         fetchPublishDate();
     });
     
-    if (!bookDetails) return <div>Loading...</div>;
+    if (!bookDetails) return <Spinner />;
     if (bookDetails) {
         // console.log(bookDetails);
         // console.log(publishDate);
