@@ -94,35 +94,41 @@ const BookDetailsPage = (props: Props) => {
     
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-6">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">{bookDetails.title}</h1>
+            {/* Title */}
+            <h1 className="text-3xl font-bold text-gray-900 text-center mb-6">{bookDetails.title}</h1>
 
-            {/* Cover Image */}
-            {bookDetails.covers && bookDetails.covers.length > 0 && (
-                <img
-                    src={`https://covers.openlibrary.org/b/id/${bookDetails.covers[0]}-L.jpg`}
-                    alt={`Cover of ${bookDetails.title}`}
-                    className="mx-auto rounded-lg shadow-md"
-                />
-            )}
+            {/* Book Info (Left side) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="flex flex-col">
+                    {/* Authors */}
+                    <p className="text-lg text-gray-700 mb-3">
+                        <strong>Authors:</strong> {authorNames.length > 0 ? authorNames.join(', ') : 'No authors available'}
+                    </p>
 
-            <p className="text-lg text-gray-700 mb-3">
-                <strong>Authors:</strong> {authorNames.length > 0 ? authorNames.join(', ') : 'No authors available'}
-            </p>
+                    {/* Publish Date */}
+                    <p className="text-lg text-gray-700 mb-3">
+                        <strong>Publish Date:</strong> {publishDate || 'Not available'}
+                    </p>
 
-            <p className="text-lg text-gray-700 mb-3">
-                <strong>Publish Date:</strong> {publishDate || 'Not available'}
-            </p>
+                    {/* Subjects */}
+                    <p className="text-lg text-gray-700 mb-3">
+                        <strong>Subjects:</strong> {bookDetails.subjects.slice(0, 5).join(', ')}
+                    </p>
+                </div>
 
-            {/*<p>*/}
-            {/*    AuthorsKeys: {bookDetails?.authors?.map((authorKey: any) => {*/}
-            {/*    return authorKey.author ? authorKey.author.key : 'Unknown Author';*/}
-            {/*    }).join(', ') || 'No authors available'}*/}
-            {/*</p>*/}
+                {/* Book Cover (Right side) */}
+                {bookDetails.covers && bookDetails.covers.length > 0 && (
+                    <div className="flex justify-center items-center">
+                        <img
+                            src={`https://covers.openlibrary.org/b/id/${bookDetails.covers[0]}-L.jpg`}
+                            alt={`Cover of ${bookDetails.title}`}
+                            className="rounded-lg shadow-md w-48 h-auto"
+                        />
+                    </div>
+                )}
+            </div>
 
-            <p className="text-lg text-gray-700 mb-3">
-                <strong>Subjects:</strong> {bookDetails.subjects.slice(0, 5).join(', ')}
-            </p>
-
+            {/* Description */}
             {bookDetails.description && (
                 <p className="text-lg text-gray-600 mb-3">
                     <strong>Description:</strong> {
