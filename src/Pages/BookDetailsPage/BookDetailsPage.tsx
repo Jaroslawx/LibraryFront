@@ -115,10 +115,13 @@ const BookDetailsPage = (props: Props) => {
     
                         {/* Subjects */}
                         <p className="text-lg text-gray-700 mb-3">
-                            <strong>Subjects:</strong> {bookDetails.subjects.slice(0, 5).join(', ')}
+                            <strong>Subjects:</strong>
+                            {bookDetails.subjects && bookDetails.subjects.length > 0
+                                ? bookDetails.subjects.slice(0, 5).join(', ')
+                                : 'No subjects available'}
                         </p>
                     </div>
-    
+
                     {/* Book Cover (Right side) */}
                     {bookDetails.covers && bookDetails.covers.length > 0 && (
                         <div className="flex justify-center items-center">
