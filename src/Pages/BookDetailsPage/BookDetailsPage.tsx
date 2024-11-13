@@ -4,6 +4,7 @@ import {getAuthorName, getPublishDate, getWorkDetails} from "../../api";
 import {BookDetails} from "../../library";
 import book from "../../Components/Book/Book";
 import Spinner from "../../Components/Spinner/Spinner";
+import RelatedAuthorBooks from "../../Components/RelatedAuthorBooks/RelatedAuthorBooks";
 
 interface Props {}
 
@@ -89,56 +90,60 @@ const BookDetailsPage = (props: Props) => {
     if (bookDetails) {
         // console.log(bookDetails);
         // console.log(publishDate);
+        // console.log(authorKeys);
         // console.log(authorNames);
     }
     
-    return (
-        <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-6">
-            {/* Title */}
-            <h1 className="text-3xl font-bold text-gray-900 text-center mb-6">{bookDetails.title}</h1>
-
-            {/* Book Info (Left side) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div className="flex flex-col">
-                    {/* Authors */}
-                    <p className="text-lg text-gray-700 mb-3">
-                        <strong>Authors:</strong> {authorNames.length > 0 ? authorNames.join(', ') : 'No authors available'}
-                    </p>
-
-                    {/* Publish Date */}
-                    <p className="text-lg text-gray-700 mb-3">
-                        <strong>Publish Date:</strong> {publishDate || 'Not available'}
-                    </p>
-
-                    {/* Subjects */}
-                    <p className="text-lg text-gray-700 mb-3">
-                        <strong>Subjects:</strong> {bookDetails.subjects.slice(0, 5).join(', ')}
-                    </p>
-                </div>
-
-                {/* Book Cover (Right side) */}
-                {bookDetails.covers && bookDetails.covers.length > 0 && (
-                    <div className="flex justify-center items-center">
-                        <img
-                            src={`https://covers.openlibrary.org/b/id/${bookDetails.covers[0]}-L.jpg`}
-                            alt={`Cover of ${bookDetails.title}`}
-                            className="rounded-lg shadow-md w-48 h-auto"
-                        />
+    return ( 
+        <>
+            <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-6">
+                {/* Title */}
+                <h1 className="text-3xl font-bold text-gray-900 text-center mb-6">{bookDetails.title}</h1>
+    
+                {/* Book Info (Left side) */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div className="flex flex-col">
+                        {/* Authors */}
+                        <p className="text-lg text-gray-700 mb-3">
+                            <strong>Authors:</strong> {authorNames.length > 0 ? authorNames.join(', ') : 'No authors available'}
+                        </p>
+    
+                        {/* Publish Date */}
+                        <p className="text-lg text-gray-700 mb-3">
+                            <strong>Publish Date:</strong> {publishDate || 'Not available'}
+                        </p>
+    
+                        {/* Subjects */}
+                        <p className="text-lg text-gray-700 mb-3">
+                            <strong>Subjects:</strong> {bookDetails.subjects.slice(0, 5).join(', ')}
+                        </p>
                     </div>
+    
+                    {/* Book Cover (Right side) */}
+                    {bookDetails.covers && bookDetails.covers.length > 0 && (
+                        <div className="flex justify-center items-center">
+                            <img
+                                src={`https://covers.openlibrary.org/b/id/${bookDetails.covers[0]}-L.jpg`}
+                                alt={`Cover of ${bookDetails.title}`}
+                                className="rounded-lg shadow-md w-48 h-auto"
+                            />
+                        </div>
+                    )}
+                </div>
+    
+                {/* Description */}
+                {bookDetails.description && (
+                    <p className="text-lg text-gray-600 mb-3">
+                        <strong>Description:</strong> {
+                        typeof bookDetails.description === 'string'
+                            ? bookDetails.description.split(/(\[source]|\(\[source])/i)[0]
+                            : (bookDetails.description as { value: string }).value.split(/(\[source]|\(\[source])/i)[0]
+                    }
+                    </p>
                 )}
             </div>
-
-            {/* Description */}
-            {bookDetails.description && (
-                <p className="text-lg text-gray-600 mb-3">
-                    <strong>Description:</strong> {
-                    typeof bookDetails.description === 'string'
-                        ? bookDetails.description.split(/(\[source]|\(\[source])/i)[0]
-                        : (bookDetails.description as { value: string }).value.split(/(\[source]|\(\[source])/i)[0]
-                }
-                </p>
-            )}
-        </div>
+            <RelatedAuthorBooks authorKey={authorKeys[0]} />
+        </>
     );
 };
 
