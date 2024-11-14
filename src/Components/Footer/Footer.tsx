@@ -6,7 +6,7 @@ interface Props {}
 
 const Footer = (props: Props) => {
     return (
-        <footer className="bg-gray-800 text-white py-6">
+        <footer className="bg-gray-800 text-white py-6 mt-auto">
             <div className="max-w-7xl mx-auto px-4">
                 <div className="flex justify-between items-center">
                     {/* Footer Content */}
