@@ -16,11 +16,8 @@ const Navbar: React.FC<Props> = () => {
                 <span className="text-2xl font-bold">BookNest</span>
             </Link>
             <ul className="flex space-x-6">
-                <li><Link to="/" className="hover:text-yellow-500">Home</Link></li>
                 <li><Link to="/search" className="hover:text-yellow-500">Search</Link></li>
-                <li><a href="/books" className="hover:text-yellow-500">Books</a></li>
                 <li><a href="/bookshelf" className="hover:text-yellow-500">Bookshelf</a></li>
-                <li><a href="/about" className="hover:text-yellow-500">About</a></li>
             </ul>
             <div className="flex space-x-4">
                 <button
