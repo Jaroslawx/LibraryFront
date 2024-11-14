@@ -11,7 +11,7 @@ const BookShelfPage = (props: Props) => {
     };
 
     return (
-        <div className="bookshelf-container p-8 bg-gray-100 rounded-lg shadow-lg max-w-4xl mx-auto">
+        <div className="bookshelf-container p-8 bg-gray-100 rounded-lg shadow-lg max-w-4xl mx-auto mt-3">
             <h1 className="text-3xl font-semibold text-center mb-6">My Bookshelf</h1>
 
             <div className="tabs flex justify-center space-x-4 mb-8">

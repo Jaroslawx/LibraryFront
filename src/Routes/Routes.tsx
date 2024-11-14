@@ -4,7 +4,7 @@ import HomePage from "../Pages/HomePage/HomePage";
 import SearchPage from "../Pages/SearchPage/SearchPage";
 import BookDetailsPage from "../Pages/BookDetailsPage/BookDetailsPage";
 import DesignPage from "../Pages/DesignPage/DesignPage";
-import BookShelfPage from "../Pages/Bookshelf/BookShelfPage";
+import BookShelfPage from "../Pages/BookShelfPage/BookShelfPage";
 
 export const router = createBrowserRouter([
     {
