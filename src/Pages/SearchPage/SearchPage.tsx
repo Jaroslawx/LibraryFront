@@ -13,10 +13,10 @@ const SearchPage = (props: Props) => {
     const [bookshelfValues, setBookshelfValues] = useState<string[]>([]);
     const [searchResult, setSearchResult] = useState<BookSearch[]>([]);
     const [serverError, setServerError] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
-        // console.log(e);
     };
 
     const onBookshelfCreate = (e: any) => {
@@ -37,28 +37,23 @@ const SearchPage = (props: Props) => {
 
     const onSearchSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
+        setIsLoading(true);
         const result = await searchBooks(search);
         if (typeof result === "string") {
             setServerError(result);
         } else {
             setSearchResult(result);
         }
-        console.log(searchResult);
+        // console.log(searchResult);
+        setIsLoading(false);
     };
     
     return (
         <div className="App">
             {serverError && <h1>{serverError}</h1>}
-            <Search
-                onSearchSubmit={onSearchSubmit}
-                search={search}
-                handleSearchChange={handleSearchChange}/>
-            <ListBookshelf
-                bookshelfValues={bookshelfValues}
-                onBookshelfDelete={onBookshelfDelete}/>
-            <BookList
-                searchResults={searchResult}
-                onBookshelfCreate={onBookshelfCreate}/>
+            <Search onSearchSubmit={onSearchSubmit} search={search} handleSearchChange={handleSearchChange}/>
+            <ListBookshelf bookshelfValues={bookshelfValues} onBookshelfDelete={onBookshelfDelete}/>
+            <BookList searchResults={searchResult} onBookshelfCreate={onBookshelfCreate} isLoading={isLoading}/>
         </div>
     );
 };

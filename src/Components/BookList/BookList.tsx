@@ -8,24 +8,24 @@ import Spinner from "../Spinner/Spinner";
 interface Props {
     searchResults: BookSearch[];
     onBookshelfCreate: (e: SyntheticEvent) => void;
+    isLoading: boolean;
 }
 
-const BookList: React.FC<Props> = ({ searchResults, onBookshelfCreate }: Props): JSX.Element => {
+const BookList: React.FC<Props> = ({ searchResults, onBookshelfCreate, isLoading }: Props): JSX.Element => {
     return (
         <>
-            {searchResults.length > 0 ? (
+            {isLoading ? ( // Spinner appears when loading
+                <div className="flex justify-center items-center">
+                    <Spinner isLoading={isLoading} />
+                </div>
+            ) : searchResults.length > 0 ? (
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {searchResults.map((result) => (
-                        <Book
-                            key={uuidv4()}
-                            id={result.key}
-                            searchResult={result}
-                            onBookshelfCreate={onBookshelfCreate}
-                        />
+                        <Book key={uuidv4()} id={result.key} searchResult={result} onBookshelfCreate={onBookshelfCreate} />
                     ))}
                 </div>
             ) : (
-                <Spinner />
+                <div>No results found.</div> // Message appears when no results are found
             )}
         </>
     );
