@@ -25,7 +25,10 @@ const BookList: React.FC<Props> = ({ searchResults, onBookshelfCreate, isLoading
                     ))}
                 </div>
             ) : (
-                <div>No results found.</div> // Message appears when no results are found
+                // Message appears when no results are found
+                <div className="text-center py-4 px-6 bg-gray-100 text-gray-600 rounded-lg shadow-md">
+                    <p className="text-xl font-semibold">No results found.</p>
+                </div>
             )}
         </>
     );
